@@ -19,9 +19,11 @@ class CommandFactoryTest {
         assertEquals(Exit(), factory.parse(listOf("exit"), emptyList()))
         assertNotEquals(Exit(), factory.parse(listOf("pwd"), emptyList()))
         assertEquals(Pwd(), factory.parse(listOf("pwd"), emptyList()))
-        assertEquals(Wc(listOf(TextNode("tmp.txt", true))), factory.parse(listOf("wc", "tmp.txt"), null))
+        assertEquals(Wc(listOf(TextNode("test.txt", true))), factory.parse(listOf("wc", "test.txt"), null))
         assertEquals(Echo(listOf(TextNode("123", true))), factory.parse(listOf("echo", "123"), null))
         assertEquals(Cat(listOf(TextNode("123", true))), factory.parse(listOf("cat", "123"), null))
+        assertEquals(Grep(listOf(TextNode("h", true), TextNode("grep_test.txt", true))),
+                factory.parse(listOf("grep", "h", "grep_test.txt"), null))
         assertEquals(Assignment(scope, "z", "5"), factory.parse(listOf("z=5"), null))
     }
 }

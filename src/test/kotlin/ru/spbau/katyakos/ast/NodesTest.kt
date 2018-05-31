@@ -7,7 +7,7 @@ class NodesTest {
 
     @Test
     fun commandNodeTest() {
-        var node = CommandNode(listOf("hello", "world"))
+        val node = CommandNode(listOf("hello", "world"))
         node.execute()
         assertEquals("", node.getResult())
     }
