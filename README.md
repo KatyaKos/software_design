@@ -56,6 +56,9 @@
 
 
 ## Архитектура в картинках
+<p align="center">
+<img src="architecture/architecture.jpg" />
+</p> 
 
 ## Библиотека разбора аргументов
 
