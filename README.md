@@ -23,5 +23,5 @@
 ## Диаграмма классов
 ![Class diagram](architectures/roguelike_class.jpg)
 
-##Диздок
-![Диздок](https://docs.google.com/document/d/1fb4i6n2V8XLFn6NP135BNWhG2quSq_wI5Izv0jy8J0c/edit?usp=sharing)
+## Диздок
+[Диздок](https://docs.google.com/document/d/1fb4i6n2V8XLFn6NP135BNWhG2quSq_wI5Izv0jy8J0c/edit?usp=sharing)
