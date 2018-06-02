@@ -20,6 +20,7 @@ class Grep(args: List<AstNode>) : Command(args,false) {
     override fun execute() {
         arguments.clear()
         super.execute()
+
         try {
             val parsedArgs = ArgParser(arguments.toTypedArray()).parseInto(::Arguments)
             val lines: List<String>
@@ -27,7 +28,8 @@ class Grep(args: List<AstNode>) : Command(args,false) {
                 val filename = parsedArgs.files
                 val file = File(filename)
                 if (file.isDirectory) {
-                    throw IllegalArgumentException("$filename is a directory")
+                    System.err.println("$filename is a directory")
+                    return
                 }
                 file.readLines()
             } catch (e: Exception) {
@@ -41,7 +43,8 @@ class Grep(args: List<AstNode>) : Command(args,false) {
                     }
             execute(lines, regex, parsedArgs.linesAfter, parsedArgs.wordsMatch)
         } catch (e: Exception) {
-            e.message?.let { System.err.println(it) }
+            System.err.println("Problem with parsing arguments occurred. Please, try again." +
+                    " Example: grep *patter* *filename* -i -w -A *number*")
         }
     }
 

@@ -1,6 +1,5 @@
 package ru.spbau.katyakos.commands
 
-import jdk.nashorn.internal.runtime.regexp.joni.Syntax.Grep
 import ru.spbau.katyakos.ast.AstNode
 import ru.spbau.katyakos.ast.TextNode
 import ru.spbau.katyakos.commands.realization.*
