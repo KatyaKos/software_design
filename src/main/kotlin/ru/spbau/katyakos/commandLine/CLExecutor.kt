@@ -8,7 +8,7 @@ import ru.spbau.katyakos.commandLine.parsers.StandardParser
 class CLExecutor(private val scope: Scope) {
 
     fun execute() {
-        while(true) {
+        while (true) {
             val line = readLine() ?: break
             val result = execute(line)
             if (result.result.isNotEmpty()) println(result.result)

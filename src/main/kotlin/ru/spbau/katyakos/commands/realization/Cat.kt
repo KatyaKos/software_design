@@ -13,13 +13,17 @@ class Cat(args: List<AstNode>) : Command(args,  false) {
     override fun equals(other: Any?): Boolean = other is Cat && super.equals(other)
 
     override fun execute(arg: AstNode) {
-        val file = arg.getResult()
-        try {
-            executionResult += File(file).inputStream().bufferedReader().use { it.readText() }
-        } catch (e: FileNotFoundException) {
-            System.err.println("Cannot find file $file")
-        } catch (e: Exception) {
-            System.err.println("Cannot read file $file")
+        val result = arg.getResult();
+        if (arg.ifTerminal()) {
+            try {
+                executionResult += File(result).inputStream().bufferedReader().use { it.readText() }
+            } catch (e: FileNotFoundException) {
+                System.err.println("Cannot find file $result")
+            } catch (e: Exception) {
+                System.err.println("Cannot read file $result")
+            }
+        } else {
+            executionResult += result;
         }
     }
 
