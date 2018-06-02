@@ -13,5 +13,8 @@
 * **Knife** &ndash; нож, дает +10 к атаке
 * **War Bonnet** &ndash; индейская шапка, +5 к защите
 
+## Диаграмма кмопонент
+![Components diagram](architectures/roguelike_comp.jpg)
+
 ## Диаграмма классов
-![Class diagram](/roguelike.jpg)
+![Class diagram](architectures/roguelike_class.jpg)
