@@ -12,3 +12,6 @@
 ## Артефакты
 * **Knife** &ndash; нож, дает +10 к атаке
 * **War Bonnet** &ndash; индейская шапка, +5 к защите
+
+## Диаграмма классов
+![Class diagram](/roguelike.jpg)
