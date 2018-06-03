@@ -1,5 +1,6 @@
 package ru.spbau.katyakos.movement
 
+import com.googlecode.lanterna.screen.Screen
 import ru.spbau.katyakos.creatures.Creature
 import ru.spbau.katyakos.creatures.Player
 import ru.spbau.katyakos.model.Game
@@ -10,8 +11,7 @@ import java.lang.Math.*
  */
 class HookStrategy : Strategy {
 
-    override fun move(creature: Creature, from: Pair<Int, Int>, game: Game): Action {
-        creature.artifacts.forEach { creature.equipArtifact(it) }
+    override fun move(creature: Creature, from: Pair<Int, Int>, game: Game, screen: Screen): Action {
         var closest = Int.MAX_VALUE
         var action = Action.random()
         game.creatures.forEach { (position, enemy) ->

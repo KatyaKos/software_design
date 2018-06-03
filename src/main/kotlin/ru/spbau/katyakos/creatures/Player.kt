@@ -4,6 +4,9 @@ import ru.spbau.katyakos.view.ConsolViewer
 import ru.spbau.katyakos.movement.Strategy
 import ru.spbau.katyakos.movement.PlayerStrategy
 
+/**
+ * Игрок, управляемый пользователем.
+ */
 class Player : Creature() {
     override fun __name__(): String = "Player"
 

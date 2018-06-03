@@ -2,35 +2,36 @@ package ru.spbau.katyakos.movement
 
 import ru.spbau.katyakos.creatures.Creature
 import ru.spbau.katyakos.model.Game
+import com.googlecode.lanterna.input.KeyStroke
+import com.googlecode.lanterna.input.KeyType
+import com.googlecode.lanterna.screen.Screen
 
 class PlayerStrategy : Strategy {
-    override fun move(creature: Creature, from: Pair<Int, Int>, game: Game): Action {
-        val command = readLine()
-        return when (command) {
-            "w" -> Action.UP
-            "s" -> Action.DOWN
-            "a" -> Action.LEFT
-            "d" -> Action.RIGHT
-            else -> {
-                val args = command!!.split(' ')
-                if (args.size == 2) {
-                    try {
-                        val index = args[1].toInt() - 1
-                        when (args[0]) {
-                            "equip" -> creature.artifacts.getOrNull(index)?.let {
-                                creature.equipArtifact(it)
-                            }
-                            "unequip" -> creature.equipped.getOrNull(index)?.let {
-                                creature.unequipArtifact(it)
-                            }
-                        }
-                    } catch (e: NumberFormatException) {
-                        println("Error: Incorrect index!")
-                    }
-                }
 
-                Action.NONE
-            }
+    override fun move(creature: Creature, from: Pair<Int, Int>, game: Game, screen: Screen): Action {
+        val stroke: KeyStroke = screen.readInput()
+        if (stroke.keyType == KeyType.Escape) {
+            return Action.NONE
+        }
+        return when (stroke.character) {
+            'w' -> Action.UP
+            'a' -> Action.LEFT
+            's' -> Action.DOWN
+            'd' -> Action.RIGHT
+            'e' -> { try{
+                creature.artifacts.getOrNull(0)?.let { creature.equipArtifact(it) }; return Action.NONE;
+            } catch (e: NumberFormatException) {
+                println("Error: Incorrect index!")
+                return Action.NONE
+            }}
+            'q' -> { try{
+                creature.equipped.getOrNull(0)?.let { creature.unequipArtifact(it) }; return Action.NONE;
+            } catch (e: NumberFormatException) {
+                println("Error: Incorrect index!")
+                return Action.NONE
+            }}
+            else -> Action.NONE
         }
     }
+
 }

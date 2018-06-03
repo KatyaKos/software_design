@@ -1,5 +1,6 @@
 package ru.spbau.katyakos.creatures
 
+import com.googlecode.lanterna.screen.Screen
 import ru.spbau.katyakos.Characteristics
 import ru.spbau.katyakos.movement.Action
 import ru.spbau.katyakos.artifacts.Artifact
@@ -8,7 +9,7 @@ import ru.spbau.katyakos.movement.Strategy
 import ru.spbau.katyakos.model.Game
 
 /**
- * Общий класс для персонжей.
+ * Общий класс для персонажей.
  */
 abstract class Creature : Drawable {
     val characteristics = Characteristics()
@@ -18,7 +19,7 @@ abstract class Creature : Drawable {
 
     abstract fun __name__(): String
 
-    fun move(from: Pair<Int, Int>, game: Game): Action = strategy.move(this, from, game)
+    fun move(from: Pair<Int, Int>, game: Game, screen: Screen): Action = strategy.move(this, from, game, screen)
 
     fun collectArtifact(artifact: Artifact) = artifacts.add(artifact)
 

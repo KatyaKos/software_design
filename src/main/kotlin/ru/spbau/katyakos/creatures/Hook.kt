@@ -4,6 +4,9 @@ import ru.spbau.katyakos.view.ConsolViewer
 import ru.spbau.katyakos.movement.HookStrategy
 import ru.spbau.katyakos.movement.Strategy
 
+/**
+ * Враг игрока - Капитан Крюк. Бегает за игроком и атакует его.
+ */
 class Hook : Creature() {
     override fun __name__(): String = "Captain Hook"
 

@@ -10,15 +10,16 @@ import ru.spbau.katyakos.model.Model
 fun main(args: Array<String>) {
     val fileName = "maps/small.txt"
     val viewer = ConsolViewer()
-    val world = Game()
-    world.create(WallsMap(fileName))
-    world.createCreature(0, 0, CreatureFactory.create(CreatureFactory.CreatureType.PLAYER))
-    world.createCreature(6, 7, CreatureFactory.create(CreatureFactory.CreatureType.HOOK))
-    world.createArtifact(1, 8, ArtifactFactory.create(ArtifactFactory.ArtifactType.KNIFE))
-    world.createArtifact(5, 2, ArtifactFactory.create(ArtifactFactory.ArtifactType.BONNET))
-    do {
+    val screen = viewer.getScreen()
+    val game = Game()
+    game.create(WallsMap(fileName))
+    game.createCreature(0, 0, CreatureFactory.create(CreatureFactory.CreatureType.PLAYER))
+    game.createCreature(6, 7, CreatureFactory.create(CreatureFactory.CreatureType.HOOK))
+    game.createArtifact(1, 8, ArtifactFactory.create(ArtifactFactory.ArtifactType.KNIFE))
+    game.createArtifact(5, 2, ArtifactFactory.create(ArtifactFactory.ArtifactType.BONNET))
+    viewer.draw(game, listOf())
+    while (!game.isFinished()) {
         viewer.clear()
-        viewer.draw(world)
-        viewer.view()
-    } while (Model.run(world))
+        viewer.draw(game, Model.run(game, screen))
+    }
 }

@@ -34,6 +34,7 @@ repositories {
 dependencies {
     compile(kotlinModule("stdlib-jdk8", kotlin_version))
     testCompile("junit:junit:4.12")
+    compile("com.googlecode.lanterna:lanterna:3.0.0")
 }
 
 tasks.withType<KotlinCompile> {
