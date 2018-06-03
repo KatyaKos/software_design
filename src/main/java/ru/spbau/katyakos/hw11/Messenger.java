@@ -11,6 +11,9 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
+/***
+ * Реализация чата, поддерживающего соездинение с другим пользователем напрямую (peer-to-peer).
+ */
 public class Messenger {
     private String author;
     private PrintStream outputStream;
@@ -18,6 +21,16 @@ public class Messenger {
     private MessengerGrpc.MessengerBlockingStub stub;
     private Server server;
 
+    /**
+     * Конструктор.
+     * @param author имя пользователя чата
+     * @param port порт пользователя
+     * @param peerAddress адрес соединения
+     * @param peerPort порт соединения
+     * @param outputStream место, куда производить вывод сообщений собеседника.
+     *                     Нужен для удобства тестирования.
+     * @throws IOException в случае, если не удалось подключиться
+     */
     public Messenger(String author, int port, String peerAddress, int peerPort,
                      PrintStream outputStream) throws IOException {
         this.author = author;
@@ -30,6 +43,11 @@ public class Messenger {
         logger.info("Created messenger.");
     }
 
+    /**
+     * Отправляет сообщение в чат.
+     * @param content текст сообщения
+     * @return true, если сообщение успешно отправлено.
+     */
     public Boolean sendMessage(String content) {
         Date date = new Date();
         Message message = Message.newBuilder().setAuthor(author).setContent(content)
@@ -46,6 +64,9 @@ public class Messenger {
         return true;
     }
 
+    /**
+     * Закрывает соединение. Используется при тестировании.
+     */
     public void shutDown() {
         try {
             server.shutdown().awaitTermination(5, TimeUnit.SECONDS);

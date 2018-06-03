@@ -24,10 +24,10 @@ public class MessengerTest {
         Messenger messenger2 = new Messenger(user2, port2, "localhost", port1, new PrintStream(stream2));
         messenger1.sendMessage(message);
         String[] received = stream2.toString().split("\n");
-        assertTrue(2 == received.length);
+        assertEquals(2, received.length);
         assertEquals(message, received[1].trim());
         String[] header = received[0].split("\t");
-        assertTrue(2 == header.length);
+        assertEquals(2, header.length);
         assertEquals("Author: " + user1, header[1]);
         messenger1.shutDown();
         messenger2.shutDown();

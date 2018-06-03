@@ -4,10 +4,22 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 
+/**
+ * Класс, запускающий чат в одностороннем порядке.
+ */
 public class Main {
+    /***
+     * Запуск и поддержка работы чата.
+     * @param args должно быть четыре аргумента.
+     *             args[0] - имя пользователя
+     *             args[1] - порт пользователя
+     *             args[2] - адрес подключения
+     *             args[3] - порт подключения
+     * @throws IOException в случае проблем с вводом-выводом в консоль
+     */
     public static void main(String[] args) throws IOException {
         Messenger messenger;
-        try{
+        try {
             String author = args[0];
             int port = Integer.parseInt(args[1]);
             String peerAddress = args[2];
