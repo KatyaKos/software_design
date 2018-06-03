@@ -17,7 +17,7 @@
 * **@ aka Player** &ndash; Герой, упраляемый игроком
 * **H aka Hook** &ndash; Капитан Крюк, атакует Героя
 
-## Диаграмма кмопонент
+## Диаграмма компонент
 ![Components diagram](architectures/roguelike_comp.jpg)
 
 ## Диаграмма классов
