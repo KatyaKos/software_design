@@ -23,11 +23,13 @@ class StandardParserTest {
     fun simpleParseTests() {
         assertEquals(Exit(), parser.parse("exit"))
         assertEquals(Echo(listOf(TextNode("123", true))), parser.parse("echo 123"))
-        assertEquals(Cat(listOf(TextNode("$path/tmp.txt", true))), parser.parse("cat $path/tmp.txt"))
+        assertEquals(Cat(listOf(TextNode("$path/test.txt", true))), parser.parse("cat $path/test.txt"))
         assertEquals(Pwd(), parser.parse("pwd"))
-        assertEquals(Wc(listOf(TextNode("$path/tmp.txt", true))), parser.parse("wc $path/tmp.txt"))
+        assertEquals(Wc(listOf(TextNode("$path/test.txt", true))), parser.parse("wc $path/test.txt"))
         assertEquals(Assignment(scope, "z", "5"), parser.parse("z=5"))
         assertEquals(Echo(listOf(TextNode("9", true))), parser.parse("echo \$x"))
+        assertEquals(Grep(listOf(TextNode("h", true), TextNode("grep_test.txt", true))),
+                parser.parse("grep h grep_test.txt"))
     }
 
     @Test
@@ -40,8 +42,8 @@ class StandardParserTest {
                 parser.parse("echo e\$x!\$y0"))
         assertEquals(Echo(listOf(Echo(listOf(TextNode("123", true))))),
                 parser.parse("echo 123 | echo"))
-        assertEquals(Echo(listOf(Cat(listOf(TextNode("$path/tmp.txt", true))))),
-                parser.parse("cat $path/tmp.txt | echo"))
+        assertEquals(Echo(listOf(Cat(listOf(TextNode("$path/test.txt", true))))),
+                parser.parse("cat $path/test.txt | echo"))
         assertEquals(Echo(listOf(TextNode("hey'", true))),
                 parser.parse("echo \"hey\'\""))
     }
@@ -52,7 +54,13 @@ class StandardParserTest {
                 parser.parse("echo 123 | wc"))
         assertEquals(Wc(listOf(Echo(listOf(TextNode("hey\"", true))))),
                 parser.parse("echo \'hey\"\' | wc"))
-        assertEquals(Wc(listOf(Cat(listOf(TextNode("$path/tmp.txt", true))))),
-                parser.parse("cat $path/tmp.txt | wc"))
+        assertEquals(Wc(listOf(Cat(listOf(TextNode("$path/test.txt", true))))),
+                parser.parse("cat $path/test.txt | wc"))
+    }
+
+    @Test
+    fun grepTest() {
+        assertEquals(Grep(listOf(TextNode("h", true), Echo(listOf(TextNode("4", true))))),
+                parser.parse("echo \$y | grep h"))
     }
 }

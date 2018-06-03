@@ -17,6 +17,10 @@ buildscript {
     
 }
 
+plugins {
+    java
+}
+
 apply {
     plugin("kotlin")
 }
@@ -29,6 +33,8 @@ repositories {
 
 dependencies {
     compile(kotlinModule("stdlib-jdk8", kotlin_version))
+    compile("com.xenomachina:kotlin-argparser:2.0.7")
+    testCompile("junit:junit:4.12")
 }
 
 tasks.withType<KotlinCompile> {

@@ -20,6 +20,7 @@ class CommandFactory(private val scope: Scope) {
         commandParsers.add({ tokens, nodes -> parseCat(tokens, nodes) })
         commandParsers.add({ tokens, nodes -> parseWc(tokens, nodes) })
         commandParsers.add({ tokens, _ -> parseAssignment(tokens) })
+        commandParsers.add({ tokens, nodes -> parseGrep(tokens, nodes) })
     }
 
     private fun getTextNodes(args: List<String>, term: Boolean)  = args.map { TextNode(it, term) }
@@ -71,6 +72,14 @@ class CommandFactory(private val scope: Scope) {
         val assignmentPos = line.indexOfFirst { it == '=' }
         if (assignmentPos == 0 || valuePos < assignmentPos) return null
         return Assignment(scope, line.substring(0, assignmentPos), line.substring(assignmentPos + 1))
+    }
+
+    private fun parseGrep(tokens: List<String>, nodes: List<AstNode>?): Grep? {
+        if (isCommand(tokens, "grep")) {
+            return if (nodes == null) Grep(getTextNodes(tokens.subList(1, tokens.size), true))
+            else Grep(getTextNodes(tokens.subList(1, tokens.size), true) + nodes)
+        }
+        return null
     }
 
     /***
